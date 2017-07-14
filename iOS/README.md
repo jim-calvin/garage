@@ -5,3 +5,4 @@ Files here are used to build an iOS application called Garage. In the original s
 The iOS app is intended to be used with the Adabox003 Garage Door tutorial described here:
 http://www.swaystairs.com/Garage
 
+This code has dependencies on CocoaMQTT
