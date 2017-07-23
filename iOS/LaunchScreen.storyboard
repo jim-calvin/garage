@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -21,18 +22,27 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Garage Door Monitor" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gVQ-qe-5Ns">
-                                <rect key="frame" x="8" y="161" width="304" height="246"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="IoT Garage Door Monitor" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gVQ-qe-5Ns">
+                                <rect key="frame" x="8" y="100" width="304" height="328"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Heavy" family="Avenir Next" pointSize="60"/>
                                 <color key="textColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" image="GarageDoorTrans.png" translatesAutoresizingMaskIntoConstraints="NO" id="2ei-YI-y9V">
+                                <rect key="frame" x="94" y="428" width="132" height="132"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="2ei-YI-y9V" secondAttribute="height" multiplier="1:1" id="qCn-bc-7u3"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="2ei-YI-y9V" firstAttribute="top" secondItem="gVQ-qe-5Ns" secondAttribute="bottom" id="4Sj-Xa-Y1u"/>
                             <constraint firstItem="gVQ-qe-5Ns" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="a8j-ox-FlW"/>
                             <constraint firstItem="gVQ-qe-5Ns" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" constant="-16" id="aCl-52-0ci"/>
-                            <constraint firstItem="gVQ-qe-5Ns" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="khC-gz-7fB"/>
+                            <constraint firstItem="gVQ-qe-5Ns" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="-20" id="khC-gz-7fB"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="2ei-YI-y9V" secondAttribute="bottom" constant="8" id="owg-eE-BzJ"/>
+                            <constraint firstItem="2ei-YI-y9V" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="xe1-tB-9tN"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -41,4 +51,7 @@
             <point key="canvasLocation" x="52.5" y="375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="GarageDoorTrans.png" width="1024" height="1024"/>
+    </resources>
 </document>
