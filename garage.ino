@@ -178,8 +178,7 @@ void setupNetwork() {
   while(io.status() < AIO_CONNECTED) {
     log(".", 0, 0);
     delay(500);
-    connectingState = !connectingState;
-    digitalWrite(connectingLEDPin, connectingState);
+    blinkBlueLED();
     counter = counter + 1;
     if (counter > 15) {                         // if the connection doesn't happen for a long time, restart
       log("waiting too long for connection; restarting...", 1, 1);
