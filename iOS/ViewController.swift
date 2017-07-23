@@ -256,15 +256,19 @@ class GarageDoor: UIViewController, UserPasswordDelegate, MFMailComposeViewContr
 
     @IBAction func logOnOffReleased(_ sender: UIButton) {
         let alert = UIAlertController(title: "Log Options", message: "Please choose an option", preferredStyle: .actionSheet)
-        var hideShow = "Hide Log"
-        if self.debugLog.isHidden {
-            hideShow = "Show Log"
+        var hideShow = "Show Log"
+        if self.logOnOffState {
+            hideShow = "Hide Log"
         }
         alert.addAction(UIAlertAction(title: hideShow, style: .default, handler: { (action) in
-            self.logOnOffState = !self.logOnOffState
+            self.logOnOffState = false
+            if (action.title == "Show Log") {
+                self.logOnOffState = true;
+            }
             UserDefaults.standard.set(self.logOnOffState, forKey: "logOnOffState")
             UserDefaults.standard.synchronize()
             self.debugLog.isHidden = !self.logOnOffState
+            self.view.setNeedsDisplay()
         }))
         alert.addAction(UIAlertAction(title: "EMail Log", style: .default, handler: { (action) in
             self.myLog("starting to send log as EMail")
@@ -620,6 +624,7 @@ extension GarageDoor: CocoaMQTTDelegate {
 [ 6 Jul 17] Removed all of the alarm code; added comments
 [14 Jul 17] Check for empty (as opposed to nil) userName & password in viewDidAppear
               also better checks for this in UserPassword delegate method
+[15 Jul 17] Tweak code in log menu handling
 
 */
 
