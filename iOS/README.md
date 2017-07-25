@@ -6,3 +6,6 @@ The iOS app is intended to be used with the Adabox003 Garage Door tutorial descr
 http://www.swaystairs.com/Garage
 
 This code has dependencies on CocoaMQTT
+
+The iOS app can be downloaded free from the App Store at<br>
+https://itunes.apple.com/us/app/garage-door-monitor/id1259995665?ls=1&mt=8
