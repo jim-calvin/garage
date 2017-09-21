@@ -24,7 +24,7 @@
 
 #include "config.h"
 
-#define loggingOn 1                     // set to 0 to disable logging to serial monitor
+#define loggingOn 0                     // set to 0 to disable logging to serial monitor
 
 // these first two are the reed switches on the garage door to detect open/close
 AdafruitIO_Feed *leftreed = io.feed("left-reed");
@@ -236,12 +236,52 @@ void saveState(AdafruitIO_Feed *theFeed, int state) {
   theFeed->save(strState);
 }
 
+char parseCmd(AdafruitIO_Data *data, int &value) {
+  String s = data->toString();
+  char cmd = s[0];
+  if ((cmd == '0') || (cmd == '1')) {   // old version
+      value = (int)cmd - (int)'0';
+      return cmd;
+  }
+  if (cmd == 'C') {
+    value = -1;
+    return s[2];
+  }
+  log("unknown cmd received", 1, 1);
+  return -1;
+}
+
+/****************************************************************** 
+ * handleOtherCommand
+ * this function examines the data set to us and determines if a
+ * other than open/close the door is there
+ * returns FALSE if normal open/close command
+ *****************************************************************/
+int handleOtherCommand(AdafruitIO_Data *data) {
+  String s = data->toString();
+  if ((s[0] == '0') || (s[0] == '1')) {
+    return 0;
+  }
+// should parse the command, but for now, the only thing other than 0/1 is force
+// an update report
+  log(s, true, true);
+  saveState(leftreed, leftReedState);
+  saveState(rightreed, rightReedState);
+  blinkBlueLED();
+// don't update the timer to insure that if this msg gets lost, the normal timed
+// one will go through
+  return 1;
+}
+
 /****************************************************************** 
  * handleLeftButton
  * this function is called when the MQTT broker sends us a publish
  * in this case the client has asked to open/close the left door
  *****************************************************************/
 void handleLeftButton(AdafruitIO_Data *data) {
+  if (handleOtherCommand(data) == 1) {
+    return;
+  }
   int value = data->toInt();
   log("left button: ", 1, 0);
   log(value, 0, 1);
@@ -267,6 +307,9 @@ void handleLeftButton(AdafruitIO_Data *data) {
  * in this case the client has asked to open/close the right door
  *****************************************************************/
 void handleRightButton(AdafruitIO_Data *data) {
+  if (handleOtherCommand(data) == 1) {
+    return;
+  }
   int value = data->toInt();
   log("right button: ", 1, 0);
   log(value, 0 , 1);
@@ -412,6 +455,7 @@ void loop() {
 [17 Jun 17] More tweaks - if we see "relay off" and it's been awhile since "relay on", pretend it's relay ON,
               turned off logging
 [ 5 Jul 17] Additional comments; deleted some unused defintions & code; conditionally compile logging
+[18 Sep 17] Multiplex commands onto the door open/close feeds so that we can request an update
 
 */
 
