@@ -581,7 +581,9 @@ extension GarageDoor: CocoaMQTTDelegate {
         subscribeTimer = nil
         if (subscribedCount > 0) {
             connectionStatus.text = "\(mqtt.host):\(mqtt.port)"
-        } else {
+            let right = feedName(kRightOpenCloseFeed)
+            mqtt.publish(right, withString: "STATUS")
+      } else {
             connectionStatus.text = "\(topic) subscribed"
             startDataAcquisitionTimer()
         }
@@ -625,6 +627,7 @@ extension GarageDoor: CocoaMQTTDelegate {
 [14 Jul 17] Check for empty (as opposed to nil) userName & password in viewDidAppear
               also better checks for this in UserPassword delegate method
 [15 Jul 17] Tweak code in log menu handling
+[18 Sep 17] Send "STATUS" after subscriptions happen, will cause feather to send us status immediately (if it gets through)
 
 */
 
